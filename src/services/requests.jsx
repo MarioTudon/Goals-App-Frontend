@@ -1,6 +1,8 @@
 export async function  requestGoals() {
-    const response = await fetch('/Goals-App/goals.json');
+    /*const response = await fetch('/Goals-App/goals.json');*/
+    const response = await fetch('http://localhost:8888/.netlify/functions/goalsAPI')
     const goals = await response.json();
+    console.log(goals)
     return goals;
 }
 

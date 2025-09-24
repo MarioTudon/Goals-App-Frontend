@@ -1,0 +1,16 @@
+GET http://localhost:8888/.netlify/functions/hola
+
+###
+POST http://localhost:8888/.netlify/functions/hola
+Content-Type: application/json
+
+{
+    "goal": "Ir a natación",
+    "frequency": 6,
+    "frequencyUnit": "Month",
+    "target": 80,
+    "icon": "👨‍💻",
+    "id": 1,
+    "count": 0
+}
+
