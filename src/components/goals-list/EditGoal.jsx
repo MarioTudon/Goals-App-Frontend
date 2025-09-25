@@ -101,6 +101,7 @@ function EditGoal() {
         const newGoal = await updateGoal();
         dispatch({ type: "update", goal: newGoal });
         navigate("/Goals-App/Goals-List");
+        console.log(state);
     }
 
     async function remove() {

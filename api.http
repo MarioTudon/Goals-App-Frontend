@@ -1,4 +1,4 @@
-GET http://localhost:8888/.netlify/functions/hola
+GET http://localhost:8888/.netlify/functions/goalsAPI
 
 ###
 POST http://localhost:8888/.netlify/functions/hola
@@ -10,7 +10,7 @@ Content-Type: application/json
     "frequencyUnit": "Month",
     "target": 80,
     "icon": "👨‍💻",
-    "id": 1,
+    "id": 5,
     "count": 0
 }
 

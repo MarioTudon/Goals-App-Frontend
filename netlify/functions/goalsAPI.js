@@ -7,18 +7,17 @@ export async function handler(event, context) {
 
   switch (event.httpMethod) {
     case 'GET':
-      console.log('Método GET ejecutado');
       return {
         statusCode: 200,
         headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:5174',
-          'Access-Control-Allow-Headers': 'Content-Type',
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+          'Access-Control-Allow-Origin': '*'
         },
         body: JSON.stringify(goals)
       };
     case 'POST':
       const newGoal = JSON.parse(event.body);
+      newGoal.id = crypto.randomUUID()
+      newGoal.count = 0
       goals.push(newGoal);
 
       // Guardar el arreglo actualizado
@@ -26,6 +25,10 @@ export async function handler(event, context) {
 
       return {
         statusCode: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
         body: JSON.stringify({ message: 'Meta agregada correctamente', goal: newGoal })
       };
 

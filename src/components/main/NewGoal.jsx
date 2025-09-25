@@ -91,8 +91,8 @@ function NewGoal() {
 
     async function create() {
         if (!verifyAndFormatForm()) return;
-        const newGoal = await createGoal();
-        dispatch({ type: 'create', goal: newGoal });
+        const newGoal = await createGoal(form);
+        //dispatch({ type: 'create', goal: form });
         navigate("/Goals-App/Goals-List");
     }
 

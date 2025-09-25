@@ -34,5 +34,14 @@
     "icon": "👨‍💻",
     "id": 4,
     "count": 0
+  },
+  {
+    "goal": "Cambiar de chamba",
+    "frequency": "3",
+    "frequencyUnit": "day",
+    "target": "3",
+    "icon": "🏃‍♂️",
+    "id": "4019feb7-2afe-4ad8-894a-33cfe2d99396",
+    "count": 0
   }
 ]

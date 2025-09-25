@@ -1,25 +1,15 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import GoalsList from '../main/GoalsList'
 import NewGoal from '../main/NewGoal'
 import Aside from '../main/Aside';
 import { Route, Routes } from 'react-router'
-import { requestGoals } from '../../services/requests';
-import { GoalsContext } from '../../context/GoalsContext';
 import Login from '../main/Login';
 import Signup from '../main/Signup';
 import ProtectedRoute from '../main/ProtectedRoute';
 import { AuthContext } from '../../context/AuthContext';
 
 function Main() {
-    const [, goalsDispatch] = useContext(GoalsContext);
     const [authState] = useContext(AuthContext);
-
-    useEffect(() => {
-        (async () => {
-            const goals = await requestGoals();
-            goalsDispatch({ type: 'read', goals: goals });
-        })();
-    }, []);
 
     return (
         <>
