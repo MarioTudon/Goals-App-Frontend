@@ -6,7 +6,7 @@ import { requestGoals } from '../../services/requests';
 
 function GoalsList() {
     const navigate = useNavigate();
-    const [goals, setGoals] = useState({})
+    const [goals, setGoals] = useState({ order: [], objects: {} })
 
     useEffect(() => {
         (async () => {
@@ -14,10 +14,6 @@ function GoalsList() {
             setGoals(goalsList)
         })();
     }, []);
-
-    useEffect(() => {
-        console.log(goals)
-    }, [goals]);
 
     return (
         <>
@@ -27,13 +23,13 @@ function GoalsList() {
                         goals?.order?.map(id =>
                             <li key={id} className='w-full my-2 flex justify-center last:mb-4 first:mt-4' onClick={() => { navigate(`/Goals-App/Goals-List/${id}`) }}>
                                 <GoalCard
-                                    goal={goals[id].goal}
-                                    frequency={goals[id].frequency}
-                                    frequencyUnit={goals[id].frequencyUnit}
-                                    target={goals[id].target}
-                                    icon={goals[id].icon}
-                                    id={goals[id].id}
-                                    count={goals[id].count}
+                                    goal={goals.objects[id].goal}
+                                    frequency={goals.objects[id].frequency}
+                                    frequencyUnit={goals.objects[id].frequencyUnit}
+                                    target={goals.objects[id].target}
+                                    icon={goals.objects[id].icon}
+                                    id={goals.objects[id].id}
+                                    count={goals.objects[id].count}
                                 />
                             </li>
                         )
