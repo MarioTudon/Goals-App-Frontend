@@ -1,4 +1,4 @@
-export async function  requestGoals() {
+export async function requestGoals() {
     const response = await fetch('http://localhost:8888/.netlify/functions/goalsAPI')
     const goals = await response.json();
     return goals;
@@ -10,13 +10,17 @@ export async function createGoal(goal) {
         method: 'POST',
         body: JSON.stringify(goal)
     })
-    const createdGoal = await response.json();
 }
 
-export async function updateGoal() {
-    const response = await fetch('/Goals-App/goal.json');
-    const updatedGoal = await response.json();
-    return updatedGoal;
+export async function updateGoal(goal) {
+    console.log(goal)
+    const response = await fetch('http://localhost:8888/.netlify/functions/goalsAPI', {
+        method: 'PATCH',
+        body: JSON.stringify(goal)
+    });
+
+    const result = await response.json();
+    return result;
 }
 
 export async function removeGoal() {

@@ -1,49 +1,15 @@
 {
-  "order": [1, 2, 3, 4, "4019feb7-2afe-4ad8-894a-33cfe2d99396"],
+  "order": [
+    "62713dae-efa9-49b7-a49f-6fdd0de4995c"
+  ],
   "objects": {
-    "1": {
-      "goal": "Practicar programación",
-      "frequency": 3,
-      "frequencyUnit": "Month",
-      "target": 80,
-      "icon": "👨‍💻",
-      "id": 1,
-      "count": 0
-    },
-    "2": {
-      "goal": "Hacer ejercicio",
-      "frequency": 5,
-      "frequencyUnit": "Week",
-      "target": 50,
-      "icon": "🏃‍♂️",
-      "id": 2,
-      "count": 0
-    },
-    "3": {
-      "goal": "Leer un libro",
-      "frequency": 1,
-      "frequencyUnit": "Month",
-      "target": 8,
-      "icon": "📖",
-      "id": 3,
-      "count": 0
-    },
-    "4": {
-      "goal": "Ir a natación",
-      "frequency": 6,
-      "frequencyUnit": "Month",
-      "target": 80,
-      "icon": "🏊‍♂️",
-      "id": 4,
-      "count": 0
-    },
-    "4019feb7-2afe-4ad8-894a-33cfe2d99396": {
+    "62713dae-efa9-49b7-a49f-6fdd0de4995c": {
       "goal": "Cambiar de chamba",
-      "frequency": 3,
-      "frequencyUnit": "Day",
-      "target": 3,
+      "frequency": "3",
+      "frequencyUnit": "day",
+      "target": "2",
       "icon": "🏃‍♂️",
-      "id": "4019feb7-2afe-4ad8-894a-33cfe2d99396",
+      "id": "62713dae-efa9-49b7-a49f-6fdd0de4995c",
       "count": 0
     }
   }

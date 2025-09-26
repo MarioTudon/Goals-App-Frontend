@@ -29,7 +29,7 @@ function GoalsList() {
                                     target={goals.objects[id].target}
                                     icon={goals.objects[id].icon}
                                     id={goals.objects[id].id}
-                                    count={goals.objects[id].count}
+                                    currentCount={goals.objects[id].count}
                                 />
                             </li>
                         )
