@@ -1,7 +1,7 @@
 GET http://localhost:8888/.netlify/functions/goalsAPI
 
 ###
-POST http://localhost:8888/.netlify/functions/hola
+POST http://localhost:8888/.netlify/functions/goalsAPI
 Content-Type: application/json
 
 {
@@ -12,5 +12,14 @@ Content-Type: application/json
     "icon": "👨‍💻",
     "id": 5,
     "count": 0
+}
+
+###
+PATCH http://localhost:8888/.netlify/functions/goalsAPI
+Content-Type: application/json
+
+{
+    "id": "62713dae-efa9-49b7-a49f-6fdd0de4995c",
+    "count": 7
 }
 

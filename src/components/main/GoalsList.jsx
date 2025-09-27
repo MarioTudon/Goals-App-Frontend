@@ -7,12 +7,7 @@ import { useEffect } from 'react';
 
 function GoalsList() {
     const navigate = useNavigate();
-    const [ state ] = useContext(GoalsContext);
-
-    useEffect(()=>{
-        console.log(state)
-    }
-    ,[]);
+    const {state} = useContext(GoalsContext);
 
     return (
         <>
@@ -28,7 +23,7 @@ function GoalsList() {
                                     target={state.objects[id].target}
                                     icon={state.objects[id].icon}
                                     id={state.objects[id].id}
-                                    currentCount={state.objects[id].count}
+                                    count={state.objects[id].count}
                                 />
                             </li>
                         )

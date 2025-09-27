@@ -16,7 +16,7 @@ const GoalsContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <GoalsContext.Provider value={[ state, dispatch ]}>
+    <GoalsContext.Provider value={{ state, dispatch }}>
       {children}
     </GoalsContext.Provider>
   );

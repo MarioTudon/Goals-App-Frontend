@@ -68,7 +68,7 @@ function EditGoal() {
         id: 0
     })
     const navigate = useNavigate();
-    const [state, dispatch] = useContext(GoalsContext);
+    const { state, dispatch } = useContext(GoalsContext);
     const { id } = useParams();
 
     useEffect(() => {
@@ -91,26 +91,26 @@ function EditGoal() {
         return str.toString().replace(/^0+(?=\d)/, '');
     }
 
-    function resetCount() {
-        dispatch({ type: 'resetCount', id: state.objects[id].id });
+    async function resetCount() {
+        const res = await updateGoal({id: id, count: 0});
+        dispatch({ type: "update", goal: res.goal });
         navigate("/Goals-App/Goals-List");
     }
 
     async function update() {
         if (!verifyAndFormatForm()) return;
-        const newGoal = await updateGoal();
-        dispatch({ type: "update", goal: newGoal });
+        const res = await updateGoal(form);
+        dispatch({ type: "update", goal: res.goal });
         navigate("/Goals-App/Goals-List");
-        console.log(state);
     }
 
     async function remove() {
-        const idToRemove = await removeGoal();
+        const idToRemove = await removeGoal(id);
         dispatch({ type: "delete", id: idToRemove });
         navigate("/Goals-App/Goals-List");
     }
 
-    return state.order.includes(Number(id)) && (
+    return state.order.includes(id) && (
         <>
             <div className="fixed w-full top-0 h-full bg-gray-400-transparent z-50">
                 <div className="w-5/6 flex flex-col top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fixed lg:w-1/3">

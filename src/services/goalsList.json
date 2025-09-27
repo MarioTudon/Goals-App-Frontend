@@ -1,16 +1,16 @@
 {
   "order": [
-    "62713dae-efa9-49b7-a49f-6fdd0de4995c"
+    "fd0b64e9-c173-489a-b3b2-ac59ab02fb58"
   ],
   "objects": {
-    "62713dae-efa9-49b7-a49f-6fdd0de4995c": {
+    "fd0b64e9-c173-489a-b3b2-ac59ab02fb58": {
       "goal": "Cambiar de chamba",
       "frequency": "3",
       "frequencyUnit": "day",
-      "target": "10",
-      "icon": "🏃‍♂️",
-      "id": "62713dae-efa9-49b7-a49f-6fdd0de4995c",
-      "count": 7
+      "target": "3",
+      "icon": "💼",
+      "id": "fd0b64e9-c173-489a-b3b2-ac59ab02fb58",
+      "count": 1
     }
   }
 }

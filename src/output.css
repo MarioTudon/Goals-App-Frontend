@@ -595,10 +595,6 @@ body {
   left: 50%;
 }
 
-.left-2 {
-  left: 0.5rem;
-}
-
 .right-0 {
   right: 0px;
 }
@@ -609,46 +605,6 @@ body {
 
 .top-1\/2 {
   top: 50%;
-}
-
-.top-2 {
-  top: 0.5rem;
-}
-
-.right-2 {
-  right: 0.5rem;
-}
-
-.-top-2 {
-  top: -0.5rem;
-}
-
-.left-16 {
-  left: 4rem;
-}
-
-.top-16 {
-  top: 4rem;
-}
-
-.-right-16 {
-  right: -4rem;
-}
-
-.right-16 {
-  right: 4rem;
-}
-
-.top-5 {
-  top: 1.25rem;
-}
-
-.top-7 {
-  top: 1.75rem;
-}
-
-.right-8 {
-  right: 2rem;
 }
 
 .z-10 {
@@ -994,12 +950,12 @@ body {
   background-color: rgb(254 226 226 / var(--tw-bg-opacity));
 }
 
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
 .bg-gradient-to-t {
   background-image: linear-gradient(to top, var(--tw-gradient-stops));
+}
+
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
 
 .from-emerald-300 {

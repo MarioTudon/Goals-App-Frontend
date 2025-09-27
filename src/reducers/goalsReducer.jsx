@@ -1,43 +1,30 @@
-//const memory = localStorage.getItem('goals');
-
-export const initialState = /*memory ? JSON.parse(memory) : */{
-    order: [],
-    objects: {}
-}
-
 function goalsReducer(state, action) {
     switch (action.type) {
         case 'create': {
-            const id = action.goal.id;//Math.random() * 1000 + Date.now();
+            const id = action.goal.id;
             const newState = {
                 order: Array.isArray(state.order) ? [...state.order, id] : [id],
                 objects: {
                     ...state.objects,
-                    [id]: { ...action.goal, count: 0, id: id }
+                    [id]: { ...action.goal, id: id }
                 }
             };
-            //localStorage.setItem('goals', JSON.stringify(newState));
             return newState
         };
         case 'read': {
-            console.log(action.goals)
             return action.goals
         };
         case 'update': {
-            const id = action.goal.id;
+            const goal = action.goal;
             const newState = {
                 ...state,
                 objects: {
                     ...state.objects,
-                    [id]: {
-                        ...state.objects[id],
-                        ...action.goal
-                    }
+                    [goal.id]: goal  
                 }
-            };
-            //localStorage.setItem('goals', JSON.stringify(newState));
+            }
             return newState;
-        };
+        }
         case 'delete': {
             const id = action.id;
             const newState = {
@@ -46,7 +33,6 @@ function goalsReducer(state, action) {
                 objects: { ...state.objects }
             };
             delete newState.objects[id];
-            //localStorage.setItem('goals', JSON.stringify(newState));
             return newState;
         }
         case 'increaseCount': {

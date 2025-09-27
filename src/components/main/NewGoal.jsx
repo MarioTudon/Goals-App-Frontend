@@ -68,7 +68,7 @@ function NewGoal() {
         id: 0
     })
     const navigate = useNavigate();
-    const [, dispatch] = useContext(GoalsContext);
+    const { dispatch} = useContext(GoalsContext);
 
     function handleChange(e, prop) {
         setForm(state => ({ ...state, [prop]: e.target.value }));
@@ -91,8 +91,8 @@ function NewGoal() {
 
     async function create() {
         if (!verifyAndFormatForm()) return;
-        const newGoal = await createGoal(form);
-        //dispatch({ type: 'create', goal: form });
+        const res = await createGoal(form);
+        dispatch({ type: 'create', goal: res.goal });
         navigate("/Goals-App/Goals-List");
     }
 

@@ -1,18 +1,21 @@
 import { useContext, useEffect, useState } from "react"
 import Button from "../shared/Button"
 import { GoalsContext } from '../../context/GoalsContext'
+import { updateGoal } from "../../services/requests";
 
 const GoalCard = ({ goal, frequency, frequencyUnit, target, icon, id, count}) => {
     const [percentage, setPercentage] = useState(0);
-    const [state,dispatch] = useContext(GoalsContext);
+    const {dispatch} = useContext(GoalsContext);
+
     useEffect(() => {
-        setPercentage(`${count / target * 100}`);
+        setPercentage((count / target) * 100);
     }, [count, target]);
 
-    function completeGoal(e) {
+    async function completeGoal(e) {
         e.stopPropagation();
         if (percentage < 100) {
-            dispatch({type:'increaseCount', id: id});
+            const res = await updateGoal({id: id, count: count + 1});
+            dispatch({type:'update', goal: res.goal});
         }
     }
 
@@ -30,7 +33,7 @@ const GoalCard = ({ goal, frequency, frequencyUnit, target, icon, id, count}) =>
                     <div className="flex flex-col items-center mr-2 w-20 lg:w-24 lg:mr-6">
                         <div className="text-sm lg:text-lg font-semibold text-center">{count} of {target}</div>
                         <div className="w-full h-2 rounded-full bg-gray-300 relative  shadow-xs shadow-gray-400">
-                            <div className={"h-2 rounded-full bg-linear-to-r from-emerald-300 to-cyan-500 absolute left-0"} style={{ 'width': `${percentage}%` }}></div>
+                            <div className={"h-2 rounded-full bg-gradient-to-r from-emerald-300 to-cyan-500 absolute left-0"} style={{ 'width': `${percentage}%` }}></div>
                         </div>
                     </div>
                     <Button label={"Complete"} styles={'bg-gray-50'} onClick={completeGoal} style={{ "background-color": "red" }} />
