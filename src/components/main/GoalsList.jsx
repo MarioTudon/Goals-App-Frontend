@@ -1,35 +1,34 @@
 import GoalCard from '../goals-list/GoalCard'
 import EditGoal from '../goals-list/EditGoal';
 import { Route, Routes, useNavigate } from 'react-router';
-import { useEffect, useState } from 'react';
-import { requestGoals } from '../../services/requests';
+import { useContext } from 'react';
+import { GoalsContext } from '../../context/GoalsContext'
+import { useEffect } from 'react';
 
 function GoalsList() {
     const navigate = useNavigate();
-    const [goals, setGoals] = useState({ order: [], objects: {} })
+    const [ state ] = useContext(GoalsContext);
 
-    useEffect(() => {
-        (async () => {
-            const goalsList = await requestGoals()
-            setGoals(goalsList)
-        })();
-    }, []);
+    useEffect(()=>{
+        console.log(state)
+    }
+    ,[]);
 
     return (
         <>
             <div className='w-11/12 mx-auto h-full lg:w-1/2'>
                 <ul className='w-full h-full flex flex-col lg:mt-0 overflow-y-auto overflow-x-clip lg:px-8'>
                     {
-                        goals?.order?.map(id =>
+                        state?.order?.map(id =>
                             <li key={id} className='w-full my-2 flex justify-center last:mb-4 first:mt-4' onClick={() => { navigate(`/Goals-App/Goals-List/${id}`) }}>
                                 <GoalCard
-                                    goal={goals.objects[id].goal}
-                                    frequency={goals.objects[id].frequency}
-                                    frequencyUnit={goals.objects[id].frequencyUnit}
-                                    target={goals.objects[id].target}
-                                    icon={goals.objects[id].icon}
-                                    id={goals.objects[id].id}
-                                    currentCount={goals.objects[id].count}
+                                    goal={state.objects[id].goal}
+                                    frequency={state.objects[id].frequency}
+                                    frequencyUnit={state.objects[id].frequencyUnit}
+                                    target={state.objects[id].target}
+                                    icon={state.objects[id].icon}
+                                    id={state.objects[id].id}
+                                    currentCount={state.objects[id].count}
                                 />
                             </li>
                         )

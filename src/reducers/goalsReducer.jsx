@@ -20,13 +20,8 @@ function goalsReducer(state, action) {
             return newState
         };
         case 'read': {
-            const goals = action.goals;
-            const newState = {
-                order: goals.map(goal => goal.id),
-                objects: goals.reduce((object, goal) => ({ ...object, [goal.id]: goal }), {})
-            };
-            //localStorage.setItem('goals', JSON.stringify(newState));
-            return newState
+            console.log(action.goals)
+            return action.goals
         };
         case 'update': {
             const id = action.goal.id;

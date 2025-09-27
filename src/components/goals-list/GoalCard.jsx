@@ -1,24 +1,19 @@
 import { useContext, useEffect, useState } from "react"
 import Button from "../shared/Button"
-import { GoalsContext } from "../../context/GoalsContext"
-import { updateGoal } from '../../services/requests'
+import { GoalsContext } from '../../context/GoalsContext'
 
-function GoalCard({ goal, frequency, frequencyUnit, target, icon, id, currentCount }) {
+const GoalCard = ({ goal, frequency, frequencyUnit, target, icon, id, count}) => {
     const [percentage, setPercentage] = useState(0);
-    const [, dispatch] = useContext(GoalsContext);
-
+    const [state,dispatch] = useContext(GoalsContext);
     useEffect(() => {
-        setPercentage(`${currentCount / target * 100}`);
-    }, [currentCount, target]);
+        setPercentage(`${count / target * 100}`);
+    }, [count, target]);
 
     function completeGoal(e) {
         e.stopPropagation();
-        (async () => {
-            if (percentage < 100) {
-                const goalsList = await updateGoal({id, count: currentCount + 1})
-                //dispatch({type:'increaseCount', id: id});
-            }
-        })();
+        if (percentage < 100) {
+            dispatch({type:'increaseCount', id: id});
+        }
     }
 
     return (
@@ -33,9 +28,9 @@ function GoalCard({ goal, frequency, frequencyUnit, target, icon, id, currentCou
                 </div>
                 <div className="flex items-center">
                     <div className="flex flex-col items-center mr-2 w-20 lg:w-24 lg:mr-6">
-                        <div className="text-sm lg:text-lg font-semibold text-center">{currentCount} of {target}</div>
-                        <div className="w-full h-2 rounded-full bg-gray-300 relative  shadow-sm shadow-gray-400">
-                            <div className={"h-2 rounded-full bg-gradient-to-r from-emerald-300 to-cyan-500 absolute left-0"} style={{ 'width': `${percentage}%` }}></div>
+                        <div className="text-sm lg:text-lg font-semibold text-center">{count} of {target}</div>
+                        <div className="w-full h-2 rounded-full bg-gray-300 relative  shadow-xs shadow-gray-400">
+                            <div className={"h-2 rounded-full bg-linear-to-r from-emerald-300 to-cyan-500 absolute left-0"} style={{ 'width': `${percentage}%` }}></div>
                         </div>
                     </div>
                     <Button label={"Complete"} styles={'bg-gray-50'} onClick={completeGoal} style={{ "background-color": "red" }} />

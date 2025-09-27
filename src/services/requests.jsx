@@ -8,14 +8,20 @@ export async function createGoal(goal) {
     //const response = await fetch('/Goals-App/goal.json');
     const response = await fetch('http://localhost:8888/.netlify/functions/goalsAPI', {
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(goal)
     })
+    return result;
 }
 
 export async function updateGoal(goal) {
-    console.log(goal)
     const response = await fetch('http://localhost:8888/.netlify/functions/goalsAPI', {
         method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(goal)
     });
 

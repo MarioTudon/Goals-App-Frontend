@@ -1,16 +1,26 @@
-import React, { useReducer, createContext } from 'react';
-import goalsReducer, { initialState } from '../reducers/goalsReducer.jsx';
+import { createContext, useReducer, useEffect } from "react"
+import goalsReducer from '../reducers/goalsReducer'
+import { requestGoals } from '../services/requests'
 
-export const GoalsContext = createContext(null);
+export const GoalsContext = createContext();
 
 const GoalsContextProvider = ({ children }) => {
-    const value = useReducer(goalsReducer, initialState);
+  const [state, dispatch] = useReducer(goalsReducer, { order: [], objects: {} });
 
-    return (
-        <GoalsContext.Provider value={value}>
-            {children}
-        </GoalsContext.Provider>
-    );
-};
+  useEffect(() => {
+    async function fetchGoals() {
+      const res = await requestGoals();
+      dispatch({ type: "read", goals: res });
+    }
+    fetchGoals();
+  }, []);
+
+  return (
+    <GoalsContext.Provider value={[ state, dispatch ]}>
+      {children}
+    </GoalsContext.Provider>
+  );
+}
+
 
 export default GoalsContextProvider;
