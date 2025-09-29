@@ -1,8 +1,8 @@
 import Header from './components/app/Header'
 import Footer from './components/app/Footer'
 import Main from './components/app/Main'
-import { AuthContext } from './context/AuthContext';
-import { useContext } from 'react';
+import { AuthContext } from './context/AuthContext'
+import { useContext } from 'react'
 
 function App() {
   const [authState] = useContext(AuthContext);

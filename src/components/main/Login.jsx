@@ -1,23 +1,23 @@
-import { useContext, useState } from "react";
-import Button from "../shared/Button";
-import { useNavigate } from "react-router";
-import { AuthContext } from "../../context/AuthContext";
+import { useContext, useState } from "react"
+import Button from "../shared/Button"
+import { useNavigate } from "react-router"
+import { AuthContext } from "../../context/AuthContext"
 
 function Login() {
     const [form, setForm] = useState({
         emai: '',
         password: ''
     })
-    const navigate = useNavigate();
-    const [, authDispatch] = useContext(AuthContext);
+    const navigate = useNavigate()
+    const [, authDispatch] = useContext(AuthContext)
 
     function handleChange(e, prop) {
-        setForm(state => ({ ...state, [prop]: e.target.value }));
+        setForm(state => ({ ...state, [prop]: e.target.value }))
     }
 
     function login() {
-        authDispatch({ type: 'authorize', user: { token: '12345', authenticated: true } });
-        navigate('/Goals-App');
+        authDispatch({ type: 'authorize', user: { token: '12345', authenticated: true } })
+        navigate('/Goals-App')
     }
 
     return (
@@ -53,4 +53,4 @@ function Login() {
     )
 }
 
-export default Login;
+export default Login

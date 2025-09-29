@@ -1,15 +1,15 @@
-import { useContext } from 'react';
+import { useContext } from 'react'
 import GoalsList from '../main/GoalsList'
 import NewGoal from '../main/NewGoal'
-import Aside from '../main/Aside';
+import Aside from '../main/Aside'
 import { Route, Routes } from 'react-router'
-import Login from '../main/Login';
-import Signup from '../main/Signup';
-import ProtectedRoute from '../main/ProtectedRoute';
-import { AuthContext } from '../../context/AuthContext';
+import Login from '../main/Login'
+import Signup from '../main/Signup'
+import ProtectedRoute from '../main/ProtectedRoute'
+import { AuthContext } from '../../context/AuthContext'
 
 function Main() {
-    const [authState] = useContext(AuthContext);
+    const [authState] = useContext(AuthContext)
 
     return (
         <>

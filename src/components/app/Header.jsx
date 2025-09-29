@@ -2,16 +2,16 @@ import logoIcon from '../../assets/logo-icon.svg'
 import accountIcon from '../../assets/account-icon.svg'
 import logoutIcon from '../../assets/logout-icon.svg'
 import { Link, useNavigate } from 'react-router'
-import { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+import { useContext } from 'react'
+import { AuthContext } from '../../context/AuthContext'
 
 function Header({ isAuthenticated }) {
-    const navigate = useNavigate();
-    const [, authDispatch] = useContext(AuthContext);
+    const navigate = useNavigate()
+    const [, authDispatch] = useContext(AuthContext)
 
     function logout() {
-        authDispatch({ type: 'authorize', user: { token: '', authenticated: false } });
-        navigate('/Goals-App/Login');
+        authDispatch({ type: 'authorize', user: { token: '', authenticated: false } })
+        navigate('/Goals-App/Login')
     }
 
     return (

@@ -1,16 +1,16 @@
-import { useNavigate } from 'react-router';
-import { useEffect } from 'react';
+import { useNavigate } from 'react-router'
+import { useEffect } from 'react'
 
 const ProtectedRoute = ({ element: Element, isAuthenticated }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate('/Goals-App/Login');
+      navigate('/Goals-App/Login')
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate])
 
-  return isAuthenticated ? <Element /> : null;
-};
+  return isAuthenticated ? <Element /> : null
+}
 
-export default ProtectedRoute;
+export default ProtectedRoute

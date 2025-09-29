@@ -1,21 +1,21 @@
 import { useContext, useEffect, useState } from "react"
 import Button from "../shared/Button"
 import { GoalsContext } from '../../context/GoalsContext'
-import { updateGoal } from "../../services/requests";
+import { updateGoal } from "../../services/requests"
 
 const GoalCard = ({ goal, frequency, frequencyUnit, target, icon, id, count}) => {
-    const [percentage, setPercentage] = useState(0);
-    const {dispatch} = useContext(GoalsContext);
+    const [percentage, setPercentage] = useState(0)
+    const {dispatch} = useContext(GoalsContext)
 
     useEffect(() => {
         setPercentage((count / target) * 100);
-    }, [count, target]);
+    }, [count, target])
 
     async function completeGoal(e) {
-        e.stopPropagation();
+        e.stopPropagation()
         if (percentage < 100) {
-            const res = await updateGoal({id: id, count: count + 1});
-            dispatch({type:'update', goal: res.goal});
+            const res = await updateGoal({id: id, count: count + 1})
+            dispatch({type:'update', goal: res.goal})
         }
     }
 

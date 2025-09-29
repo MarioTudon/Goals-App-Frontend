@@ -1,13 +1,12 @@
 import GoalCard from '../goals-list/GoalCard'
-import EditGoal from '../goals-list/EditGoal';
-import { Route, Routes, useNavigate } from 'react-router';
-import { useContext } from 'react';
+import UpdateGoal from '../goals-list/UpdateGoal'
+import { Route, Routes, useNavigate } from 'react-router'
+import { useContext } from 'react'
 import { GoalsContext } from '../../context/GoalsContext'
-import { useEffect } from 'react';
 
 function GoalsList() {
     const navigate = useNavigate();
-    const {state} = useContext(GoalsContext);
+    const { state } = useContext(GoalsContext)
 
     return (
         <>
@@ -17,13 +16,7 @@ function GoalsList() {
                         state?.order?.map(id =>
                             <li key={id} className='w-full my-2 flex justify-center last:mb-4 first:mt-4' onClick={() => { navigate(`/Goals-App/Goals-List/${id}`) }}>
                                 <GoalCard
-                                    goal={state.objects[id].goal}
-                                    frequency={state.objects[id].frequency}
-                                    frequencyUnit={state.objects[id].frequencyUnit}
-                                    target={state.objects[id].target}
-                                    icon={state.objects[id].icon}
-                                    id={state.objects[id].id}
-                                    count={state.objects[id].count}
+                                    {...state.objects[id]}
                                 />
                             </li>
                         )
@@ -31,10 +24,10 @@ function GoalsList() {
                 </ul>
             </div>
             <Routes>
-                <Route path='/:id' element={<EditGoal />} />
+                <Route path='/:id' element={<UpdateGoal />} />
             </Routes>
         </>
     )
 }
 
-export default GoalsList;
+export default GoalsList

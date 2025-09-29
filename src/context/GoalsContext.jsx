@@ -5,12 +5,18 @@ import { requestGoals } from '../services/requests'
 export const GoalsContext = createContext();
 
 const GoalsContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(goalsReducer, { order: [], objects: {} });
+  const [state, dispatch] = useReducer(goalsReducer, { order: [], objects: {} })
 
   useEffect(() => {
     async function fetchGoals() {
-      const res = await requestGoals();
-      dispatch({ type: "read", goals: res });
+      try {
+        const res = await requestGoals()
+        dispatch({ type: "read", goals: res })
+      }
+      catch (error) {
+        console.error(error)
+        //Mandar a otra pagina para recargar
+      }
     }
     fetchGoals();
   }, []);
@@ -23,4 +29,4 @@ const GoalsContextProvider = ({ children }) => {
 }
 
 
-export default GoalsContextProvider;
+export default GoalsContextProvider

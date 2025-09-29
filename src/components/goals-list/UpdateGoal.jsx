@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from "react";
-import Button from "../shared/Button";
-import { useNavigate, useParams } from "react-router";
-import { GoalsContext } from "../../context/GoalsContext";
-import { removeGoal, updateGoal } from "../../services/requests";
+import { useContext, useEffect, useState } from "react"
+import Button from "../shared/Button"
+import { useNavigate, useParams } from "react-router"
+import { GoalsContext } from "../../context/GoalsContext"
+import { removeGoal, updateGoal } from "../../services/requests"
 
 const icons = [
     // 1. Salud y bienestar:
@@ -59,7 +59,7 @@ const frequencyUnits = [
 
 function EditGoal() {
 
-    const [form, setForm] = useState({
+    const [updatedGoal, setUpdatedGoal] = useState({
         goal: "",
         frequency: 0,
         frequencyUnit: "",
@@ -67,23 +67,23 @@ function EditGoal() {
         icon: "",
         id: 0
     })
-    const navigate = useNavigate();
-    const { state, dispatch } = useContext(GoalsContext);
-    const { id } = useParams();
+    const navigate = useNavigate()
+    const { state, dispatch } = useContext(GoalsContext)
+    const { id } = useParams()
 
     useEffect(() => {
-        setForm(state.objects[id]);
+        setUpdatedGoal(state.objects[id])
     }, [id]);
 
     function handleChange(e, prop) {
-        setForm(state => ({ ...state, [prop]: e.target.value }));
+        setUpdatedGoal(state => ({ ...state, [prop]: e.target.value }))
     }
     function verifyAndFormatForm() {
-        if (form.frequency !== "" && (form.frequency < 1 || form.frequency > 99)) { alert("Frequency must be between 1 and 99"); return false; }
-        if (form.target !== "" && (form.target < 1 || form.target > 99)) { alert("Target must be between 1 and 99"); return false; }
-        if (form.target <= state.objects[id].count && form.target !== "") { alert("Target should be greater than count"); return false; }
-        form.frequency = removeLeadingZerosRegex(form.frequency);
-        form.target = removeLeadingZerosRegex(form.target);
+        if (updatedGoal.frequency !== "" && (updatedGoal.frequency < 1 || updatedGoal.frequency > 99)) { alert("Frequency must be between 1 and 99"); return false; }
+        if (updatedGoal.target !== "" && (updatedGoal.target < 1 || updatedGoal.target > 99)) { alert("Target must be between 1 and 99"); return false; }
+        if (updatedGoal.target <= state.objects[id].count && updatedGoal.target !== "") { alert("Target should be greater than count"); return false; }
+        updatedGoal.frequency = removeLeadingZerosRegex(updatedGoal.frequency);
+        updatedGoal.target = removeLeadingZerosRegex(updatedGoal.target);
         return true;
     }
 
@@ -92,22 +92,22 @@ function EditGoal() {
     }
 
     async function resetCount() {
-        const res = await updateGoal({id: id, count: 0});
-        dispatch({ type: "update", goal: res.goal });
-        navigate("/Goals-App/Goals-List");
+        const res = await updateGoal({id: id, count: 0})
+        dispatch({ type: "update", goal: res.goal })
+        navigate("/Goals-App/Goals-List")
     }
 
     async function update() {
-        if (!verifyAndFormatForm()) return;
-        const res = await updateGoal(form);
-        dispatch({ type: "update", goal: res.goal });
-        navigate("/Goals-App/Goals-List");
+        if (!verifyAndFormatForm()) return
+        const response = await updateGoal(updatedGoal)
+        dispatch({ type: "update", updatedGoal: response.goal })
+        navigate("/Goals-App/Goals-List")
     }
 
-    async function remove() {
-        const idToRemove = await removeGoal(id);
-        dispatch({ type: "delete", id: idToRemove });
-        navigate("/Goals-App/Goals-List");
+    async function remove() { 
+        const idToRemove = await removeGoal(id)
+        dispatch({ type: "delete", id: idToRemove })
+        navigate("/Goals-App/Goals-List")
     }
 
     return state.order.includes(id) && (

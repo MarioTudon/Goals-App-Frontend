@@ -1,21 +1,26 @@
 function goalsReducer(state, action) {
     switch (action.type) {
         case 'create': {
-            const id = action.goal.id;
+            const id = action.newGoal.id
+
+            if(action.newGoal.id === -1) {
+                return state
+            }
+
             const newState = {
                 order: Array.isArray(state.order) ? [...state.order, id] : [id],
                 objects: {
                     ...state.objects,
-                    [id]: { ...action.goal, id: id }
+                    [id]: { ...action.newGoal, id: id }
                 }
-            };
+            }
             return newState
-        };
+        }
         case 'read': {
             return action.goals
         };
         case 'update': {
-            const goal = action.goal;
+            const goal = action.updatedGoal;
             const newState = {
                 ...state,
                 objects: {
@@ -31,38 +36,8 @@ function goalsReducer(state, action) {
                 ...state,
                 order: state.order.filter(item => item !== id),
                 objects: { ...state.objects }
-            };
+            }
             delete newState.objects[id];
-            return newState;
-        }
-        case 'increaseCount': {
-            const id = action.id;
-            const newState = {
-                ...state,
-                objects: {
-                    ...state.objects,
-                    [id]: {
-                        ...state.objects[id],
-                        count: state.objects[id].count + 1
-                    }
-                }
-            };
-            //localStorage.setItem('goals', JSON.stringify(newState));
-            return newState;
-        }
-        case 'resetCount': {
-            const id = action.id;
-            const newState = {
-                ...state,
-                objects: {
-                    ...state.objects,
-                    [id]: {
-                        ...state.objects[id],
-                        count: 0
-                    }
-                }
-            };
-            //localStorage.setItem('goals', JSON.stringify(newState));
             return newState;
         }
         default: {
@@ -71,4 +46,4 @@ function goalsReducer(state, action) {
     }
 }
 
-export default goalsReducer;
+export default goalsReducer

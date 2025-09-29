@@ -1,30 +1,30 @@
-import { useRef, useState } from 'react';
+import { useRef, useState } from 'react'
 import AsideButton from '../aside/AsideButton'
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router'
 
 function Aside({ isAuthenticated }) {
-    const [arrowRotation, setArrowRotation] = useState("rotate-0");
-    const [arrowDirection, setArrowDirection] = useState("rightBounce");
-    const [asideWidth, setAsideWidth] = useState("w-0");
-    const [isHided, setIsHided] = useState(true);
-    const screen = useRef(null);
-    const screenChild = useRef(null);
-    const location = useLocation();
+    const [arrowRotation, setArrowRotation] = useState("rotate-0")
+    const [arrowDirection, setArrowDirection] = useState("rightBounce")
+    const [asideWidth, setAsideWidth] = useState("w-0")
+    const [isHided, setIsHided] = useState(true)
+    const screen = useRef(null)
+    const screenChild = useRef(null)
+    const location = useLocation()
 
 
     function hideMenu(e) {
         const condition = e ? isHided && e.target !== screen.current && e.target !== screenChild.current : isHided;
         if (condition) {
-            setArrowRotation("rotate-180");
-            setArrowDirection("leftBounce");
-            setAsideWidth("w-40");
-            setIsHided(false);
+            setArrowRotation("rotate-180")
+            setArrowDirection("leftBounce")
+            setAsideWidth("w-40")
+            setIsHided(false)
         }
         else {
-            setArrowRotation("rotate-0");
-            setArrowDirection("rightBounce");
-            setAsideWidth("w-0");
-            setIsHided(true);
+            setArrowRotation("rotate-0")
+            setArrowDirection("rightBounce")
+            setAsideWidth("w-0")
+            setIsHided(true)
         }
 
     }
@@ -72,4 +72,4 @@ function Aside({ isAuthenticated }) {
     )
 }
 
-export default Aside;
+export default Aside

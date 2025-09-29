@@ -6,4 +6,4 @@ function Button({ label, styles, onClick }) {
     )
 }
 
-export default Button;
+export default Button

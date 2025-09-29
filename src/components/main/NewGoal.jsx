@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
-import Button from "../shared/Button";
-import { useNavigate } from "react-router";
-import { GoalsContext } from "../../context/GoalsContext";
-import { createGoal } from "../../services/requests";
+import { useContext, useState } from "react"
+import Button from "../shared/Button"
+import { useNavigate } from "react-router"
+import { GoalsContext } from "../../context/GoalsContext"
+import { createGoal } from "../../services/requests"
 
 const icons = [
     // 1. Salud y bienestar:
@@ -59,7 +59,7 @@ const frequencyUnits = [
 
 function NewGoal() {
 
-    const [form, setForm] = useState({
+    const [newGoal, setNewGoal] = useState({
         goal: "",
         frequency: 0,
         frequencyUnit: "day",
@@ -68,32 +68,41 @@ function NewGoal() {
         id: 0
     })
     const navigate = useNavigate();
-    const { dispatch} = useContext(GoalsContext);
+    const { dispatch } = useContext(GoalsContext)
 
     function handleChange(e, prop) {
-        setForm(state => ({ ...state, [prop]: e.target.value }));
+        setNewGoal(state => ({ ...state, [prop]: e.target.value }))
     }
 
     function verifyAndFormatForm() {
-        if (form.goal === "") { alert("Enter your goal description"); return false; }
-        if (form.frequency === "") { alert("Enter the frequency of goal"); return false; }
-        if (form.frequency < 1 || form.frequency > 99) { alert("Frequency must be between 1 and 99"); return false; }
-        if (form.target === "") { alert("Enter your target"); return false; }
-        if (form.target < 1 || form.target > 99) { alert("Target must be between 1 and 99"); return false; }
-        form.frequency = removeLeadingZerosRegex(form.frequency);
-        form.target = removeLeadingZerosRegex(form.target);
+        if (newGoal.goal === "") { alert("Enter your goal description"); return false; }
+        if (newGoal.frequency === "") { alert("Enter the frequency of goal"); return false; }
+        if (newGoal.frequency < 1 || newGoal.frequency > 99) { alert("Frequency must be between 1 and 99"); return false; }
+        if (newGoal.target === "") { alert("Enter your target"); return false; }
+        if (newGoal.target < 1 || newGoal.target > 99) { alert("Target must be between 1 and 99"); return false; }
+        newGoal.frequency = removeLeadingZerosRegex(newGoal.frequency);
+        newGoal.target = removeLeadingZerosRegex(newGoal.target);
         return true;
     }
 
     function removeLeadingZerosRegex(str) {
-        return str.toString().replace(/^0+(?=\d)/, '');
+        return str.toString().replace(/^0+(?=\d)/, '')
     }
 
     async function create() {
-        if (!verifyAndFormatForm()) return;
-        const res = await createGoal(form);
-        dispatch({ type: 'create', goal: res.goal });
-        navigate("/Goals-App/Goals-List");
+        if (!verifyAndFormatForm()) return
+        try {
+            const response = await createGoal(newGoal)
+            dispatch({ type: 'create', newGoal: response.goal })
+            navigate("/Goals-App/Goals-List")
+        }
+        catch (error) {
+            switch (error.message) {
+                case '400':
+                    console.error('Error: No se puede poner a')
+                default:
+            }
+        }
     }
 
     return (

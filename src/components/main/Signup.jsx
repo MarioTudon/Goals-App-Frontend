@@ -1,6 +1,6 @@
-import { useState } from "react";
-import Button from "../shared/Button";
-import { useNavigate } from "react-router";
+import { useState } from "react"
+import Button from "../shared/Button"
+import { useNavigate } from "react-router"
 
 function Signup() {
     const [form, setForm] = useState({
@@ -10,11 +10,11 @@ function Signup() {
     const navigate = useNavigate();
 
     function handleChange(e, prop) {
-        setForm(state => ({ ...state, [prop]: e.target.value }));
+        setForm(state => ({ ...state, [prop]: e.target.value }))
     }
 
     function signup() {
-        console.log(form);
+        console.log(form)
     }
 
     return (
@@ -54,4 +54,4 @@ function Signup() {
     )
 }
 
-export default Signup;
+export default Signup
