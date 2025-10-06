@@ -88,25 +88,25 @@ function EditGoal() {
     }
 
     function removeLeadingZerosRegex(str) {
-        return str.toString().replace(/^0+(?=\d)/, '');
+        return parseInt(str.toString().replace(/^0+(?=\d)/, ''),10)
     }
 
     async function resetCount() {
-        const res = await updateGoal({id: id, count: 0})
-        dispatch({ type: "update", goal: res.goal })
+        const response = await updateGoal({id: id, count: 0})
+        dispatch({ type: "update", updatedGoal: response })
         navigate("/Goals-App/Goals-List")
     }
 
     async function update() {
         if (!verifyAndFormatForm()) return
         const response = await updateGoal(updatedGoal)
-        dispatch({ type: "update", updatedGoal: response.goal })
+        dispatch({ type: "update", updatedGoal: response })
         navigate("/Goals-App/Goals-List")
     }
 
     async function remove() { 
-        const idToRemove = await removeGoal(id)
-        dispatch({ type: "delete", id: idToRemove })
+        const response = await removeGoal(id)
+        dispatch({ type: "delete", id: response })
         navigate("/Goals-App/Goals-List")
     }
 

@@ -20,7 +20,7 @@ function goalsReducer(state, action) {
             return action.goals
         };
         case 'update': {
-            const goal = action.updatedGoal;
+            const goal = action.updatedGoal
             const newState = {
                 ...state,
                 objects: {
@@ -31,17 +31,17 @@ function goalsReducer(state, action) {
             return newState;
         }
         case 'delete': {
-            const id = action.id;
+            const id = action.id
             const newState = {
                 ...state,
                 order: state.order.filter(item => item !== id),
                 objects: { ...state.objects }
             }
-            delete newState.objects[id];
-            return newState;
+            delete newState.objects[id]
+            return newState
         }
         default: {
-            throw new Error('The action doesn\'t exist');
+            throw new Error('The action doesn\'t exist')
         }
     }
 }

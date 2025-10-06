@@ -15,7 +15,6 @@ const GoalsContextProvider = ({ children }) => {
       }
       catch (error) {
         console.error(error)
-        //Mandar a otra pagina para recargar
       }
     }
     fetchGoals();

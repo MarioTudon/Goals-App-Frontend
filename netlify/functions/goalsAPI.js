@@ -61,15 +61,6 @@ export async function handler(event, context) {
         const updatedGoal = JSON.parse(event.body);
         const id = updatedGoal.id
 
-        // Para verificar que se cumpla bien el formato de la solicitud
-        // if (newGoal.goal == 'a') {
-        //   return {
-        //     statusCode: 400,
-        //     headers: headers,
-        //     body: ''
-        //   }
-        // }
-
         if (!id || !goals.objects[id]) {
           return {
             statusCode: 404,

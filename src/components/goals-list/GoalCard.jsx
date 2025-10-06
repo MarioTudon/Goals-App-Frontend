@@ -14,8 +14,8 @@ const GoalCard = ({ goal, frequency, frequencyUnit, target, icon, id, count}) =>
     async function completeGoal(e) {
         e.stopPropagation()
         if (percentage < 100) {
-            const res = await updateGoal({id: id, count: count + 1})
-            dispatch({type:'update', goal: res.goal})
+            const response = await updateGoal({id: id, count: count + 1})
+            dispatch({type:'update', updatedGoal: response})
         }
     }
 

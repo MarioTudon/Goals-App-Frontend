@@ -62,17 +62,23 @@ function NewGoal() {
     const [newGoal, setNewGoal] = useState({
         goal: "",
         frequency: 0,
-        frequencyUnit: "day",
-        target: "",
+        frequencyUnit: "Day",
+        target: 0,
         icon: "🏃‍♂️",
         id: 0
     })
     const navigate = useNavigate();
     const { dispatch } = useContext(GoalsContext)
 
+
     function handleChange(e, prop) {
-        setNewGoal(state => ({ ...state, [prop]: e.target.value }))
+        const value = e.target.value
+        setNewGoal(state => ({
+            ...state,
+            [prop]: value
+        }))
     }
+
 
     function verifyAndFormatForm() {
         if (newGoal.goal === "") { alert("Enter your goal description"); return false; }
@@ -86,22 +92,18 @@ function NewGoal() {
     }
 
     function removeLeadingZerosRegex(str) {
-        return str.toString().replace(/^0+(?=\d)/, '')
+        return parseInt(str.toString().replace(/^0+(?=\d)/, ''))
     }
 
     async function create() {
         if (!verifyAndFormatForm()) return
         try {
             const response = await createGoal(newGoal)
-            dispatch({ type: 'create', newGoal: response.goal })
+            dispatch({ type: 'create', newGoal: response })
             navigate("/Goals-App/Goals-List")
         }
         catch (error) {
-            switch (error.message) {
-                case '400':
-                    console.error('Error: No se puede poner a')
-                default:
-            }
+            console.error(error)
         }
     }
 
