@@ -13,7 +13,7 @@ createRoot(document.getElementById('root')).render(
       <AuthContextProvider>
         <GoalsContextProvider>
           <Routes>
-            <Route path="/Goals-App/*" element={<App />} />
+            <Route path="/*" element={<App />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
         </GoalsContextProvider>

@@ -1,5 +1,5 @@
 export async function requestGoals() {
-  const response = await fetch('http://localhost:3000/goals')
+  const response = await fetch('https://goals-app-backend-production-e4c3.up.railway.app/goals')
   if (!response.ok) {
     throw new Error()
   }
@@ -8,7 +8,7 @@ export async function requestGoals() {
 }
 
 export async function createGoal(goal) {
-  const response = await fetch('http://localhost:3000/goals', {
+  const response = await fetch('https://goals-app-backend-production-e4c3.up.railway.app/goals', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(goal)
@@ -22,7 +22,7 @@ export async function createGoal(goal) {
 }
 
 export async function updateGoal(goal) {
-  const response = await fetch(`http://localhost:3000/goals/${goal.id}`, {
+  const response = await fetch(`https://goals-app-backend-production-e4c3.up.railway.app/goals/${goal.id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(goal)
@@ -32,7 +32,7 @@ export async function updateGoal(goal) {
 }
 
 export async function removeGoal(id) {
-  const response = await fetch(`http://localhost:3000/goals/${id}`, {
+  const response = await fetch(`https://goals-app-backend-production-e4c3.up.railway.app/goals/${id}`, {
     method: 'DELETE'
   })
   const idToRemove = await response.json()

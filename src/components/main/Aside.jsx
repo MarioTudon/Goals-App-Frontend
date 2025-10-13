@@ -36,7 +36,7 @@ function Aside({ isAuthenticated }) {
                     text={'Goals List'}
                     sectionID={"goalsList"}
                     autoFocus
-                    url='/Goals-App/Goals-List'
+                    url='/Goals-List'
                     onClick={hideMenu}
                 >
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="min-w-6 min-h-6 w-6 h-6 ml-4 mr-3">
@@ -50,7 +50,7 @@ function Aside({ isAuthenticated }) {
                 <AsideButton
                     text={'New Goal'}
                     sectionID={"newGoal"}
-                    url='/Goals-App/New-Goal'
+                    url='/New-Goal'
                     onClick={hideMenu}
                 >
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="min-w-6 min-h-6 w-6 h-6 ml-4 mr-3">

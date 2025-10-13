@@ -100,7 +100,7 @@ function NewGoal() {
         try {
             const response = await createGoal(newGoal)
             dispatch({ type: 'create', payload: response })
-            navigate("/Goals-App/Goals-List")
+            navigate("/Goals-List")
         }
         catch (error) {
             console.error(error)

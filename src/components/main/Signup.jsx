@@ -46,7 +46,7 @@ function Signup() {
                     <Button
                         label={"Cancel"}
                         styles={"bg-red-100 text-red-700 outline outline-1 outline-red-700"}
-                        onClick={() => navigate('/Goals-App/Login')}
+                        onClick={() => navigate('/Login')}
                     />
                 </div>
             </div>

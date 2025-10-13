@@ -11,14 +11,14 @@ function Header({ isAuthenticated }) {
 
     function logout() {
         authDispatch({ type: 'authorize', user: { token: '', authenticated: false } })
-        navigate('/Goals-App/Login')
+        navigate('/Login')
     }
 
     return (
         <>
             <header className='h-12 flex justify-between text-gray-700 relative py-2 bg-gray-200 shadow-md shadow-gray-400 z-40 mb-auto'>
                 <div className='flex items-center ml-4'>
-                    <Link to={'/Goals-App'} className='mr-2'>
+                    <Link to={'/Goals-List'} className='mr-2'>
                         <img src={logoIcon} alt='logo' className='w-10 h-10' />
                     </Link>
                     <p className='text-lg font-bold uppercase text-gray-700'>Goals App</p>
@@ -31,7 +31,7 @@ function Header({ isAuthenticated }) {
                             )
                             :
                             (
-                                <Link to={'/Goals-App/Login'}>
+                                <Link to={'/Login'}>
                                     <img src={accountIcon} alt='Account Icon' className='w-8 h-8 p-1 rounded-full hover:scale-125 transition duration-medium' />
                                 </Link>
                             )

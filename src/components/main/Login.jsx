@@ -17,7 +17,7 @@ function Login() {
 
     function login() {
         authDispatch({ type: 'authorize', user: { token: '12345', authenticated: true } })
-        navigate('/Goals-App')
+        navigate('/Goals-List')
     }
 
     return (
@@ -45,7 +45,7 @@ function Login() {
                     <Button
                         label={"Sign up"}
                         styles={"bg-blue-100 text-blue-700 outline outline-1 outline-blue-700"}
-                        onClick={() => navigate('/Goals-App/Signup')}
+                        onClick={() => navigate('/Signup')}
                     />
                 </div>
             </div>
