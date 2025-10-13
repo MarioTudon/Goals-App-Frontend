@@ -99,7 +99,7 @@ function NewGoal() {
         if (!verifyAndFormatForm()) return
         try {
             const response = await createGoal(newGoal)
-            dispatch({ type: 'create', newGoal: response })
+            dispatch({ type: 'create', payload: response })
             navigate("/Goals-App/Goals-List")
         }
         catch (error) {

@@ -15,7 +15,7 @@ const GoalCard = ({ goal, frequency, frequencyUnit, target, icon, id, count}) =>
         e.stopPropagation()
         if (percentage < 100) {
             const response = await updateGoal({id: id, count: count + 1})
-            dispatch({type:'update', updatedGoal: response})
+            dispatch({type:'update', payload: response})
         }
     }
 

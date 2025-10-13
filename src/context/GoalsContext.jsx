@@ -11,7 +11,7 @@ const GoalsContextProvider = ({ children }) => {
     async function fetchGoals() {
       try {
         const res = await requestGoals()
-        dispatch({ type: "read", goals: res })
+        dispatch({ type: "read", payload: res })
       }
       catch (error) {
         console.error(error)

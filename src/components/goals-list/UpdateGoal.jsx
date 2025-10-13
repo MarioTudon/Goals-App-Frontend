@@ -93,20 +93,20 @@ function EditGoal() {
 
     async function resetCount() {
         const response = await updateGoal({id: id, count: 0})
-        dispatch({ type: "update", updatedGoal: response })
+        dispatch({ type: "update", payload: response })
         navigate("/Goals-App/Goals-List")
     }
 
     async function update() {
         if (!verifyAndFormatForm()) return
         const response = await updateGoal(updatedGoal)
-        dispatch({ type: "update", updatedGoal: response })
+        dispatch({ type: "update", payload: response })
         navigate("/Goals-App/Goals-List")
     }
 
     async function remove() { 
         const response = await removeGoal(id)
-        dispatch({ type: "delete", id: response })
+        dispatch({ type: "delete", payload: response })
         navigate("/Goals-App/Goals-List")
     }
 
