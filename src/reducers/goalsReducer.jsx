@@ -19,9 +19,9 @@ function goalsReducer(state, action) {
 
             const order = goals.map(goal => goal.id)
             const objects = goals.reduce((acc, goal) => {
-                acc[goal.id] = goal;
-                return acc;
-            }, {});
+                acc[goal.id] = goal
+                return acc
+            }, {})
             return {
                 order,
                 objects
