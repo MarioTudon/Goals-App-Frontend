@@ -57,7 +57,7 @@ export async function removeGoal(id) {
 }
 
 export async function registerUser(user) {
-  const response = await fetch(`https://goals-app-backend-production-e4c3.up.railway.app//auth/register`, {
+  const response = await fetch(`https://goals-app-backend-production-e4c3.up.railway.app/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user)
@@ -72,7 +72,7 @@ export async function registerUser(user) {
 
 
 export async function loginUser(user) {
-  const response = await fetch(`https://goals-app-backend-production-e4c3.up.railway.app//auth/login`, {
+  const response = await fetch(`https://goals-app-backend-production-e4c3.up.railway.app/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
@@ -91,7 +91,7 @@ export async function loginUser(user) {
 
 
 export async function logoutUser() {
-  const response = await fetch(`https://goals-app-backend-production-e4c3.up.railway.app//auth/logout`, {
+  const response = await fetch(`https://goals-app-backend-production-e4c3.up.railway.app/auth/logout`, {
     credentials: 'include',
   })
 
