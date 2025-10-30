@@ -2,9 +2,12 @@ import { use } from "react"
 import customErrors from '../../errors/customErrors.js'
 
 export async function requestGoals() {
-  const response = await fetch('http://localhost:3000/goals')
+  const response = await fetch('http://localhost:3000/goals', {
+    credentials: 'include',
+  })
   if (!response.ok) {
-    throw new Error()
+    const error = await response.json()
+    throw new customErrors.APIError(error.details, error.error)
   }
   const goals = await response.json(`${response.status}`)
   return goals.body
@@ -14,11 +17,12 @@ export async function createGoal(goal) {
   const response = await fetch('http://localhost:3000/goals', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
     body: JSON.stringify(goal)
   })
   if (!response.ok) {
     const error = await response.json()
-    throw new Error(`${error}`)
+    throw new customErrors.APIError(error.details, error.error)
   }
   const newGoal = await response.json()
   return newGoal.body
@@ -50,10 +54,7 @@ export async function registerUser(user) {
   })
   if (!response.ok) {
     const error = await response.json()
-    if (!response.ok) {
-      throw new customErrors.APIError(error.details, error.error)
-    }
-
+    throw new customErrors.APIError(error.details, error.error)
   }
   const newUser = await response.json()
   return newUser
@@ -86,9 +87,7 @@ export async function logoutUser() {
 
   if (!response.ok) {
     const error = await response.json()
-    if (!response.ok) {
-      throw new customErrors.APIError(error.details, error.error)
-    }
+    throw new customErrors.APIError(error.details, error.error)
   }
 }
 
@@ -99,8 +98,6 @@ export async function refreshToken() {
 
   if (!response.ok) {
     const error = await response.json()
-    if (!response.ok) {
-      throw new customErrors.APIError(error.details, error.error)
-    }
+    throw new customErrors.APIError(error.details, error.error)
   }
 }

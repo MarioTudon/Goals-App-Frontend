@@ -10,15 +10,14 @@ import { AuthContext } from '../../context/AuthContext'
 
 function Main() {
     const { state } = useContext(AuthContext)
-
     return (
         <>
             <main className='h-full relative bg-gradient-to-t from-gray-400 to-gray-100 overflow-y-auto lg:flex'>
                 <Aside isAuthenticated={state.authenticated} />
                 <Routes>
                     {/*Rutas publicas*/}
-                    <Route path='/Login' element={<Login />} />
-                    <Route path='/Signup' element={<Signup />} />
+                    {!state.authenticated && <Route path='/Login' element={<Login />} />}
+                    {!state.authenticated && <Route path='/Signup' element={<Signup />} />}
                     {/*Rutas privadas*/}
                     <Route path='/*' element={<ProtectedRoute element={GoalsList} isAuthenticated={state.authenticated} />} />
                     <Route path='/Goals-List/*' element={<ProtectedRoute element={GoalsList} isAuthenticated={state.authenticated} />} />

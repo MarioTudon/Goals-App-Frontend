@@ -6,4 +6,12 @@ class APIError extends Error {
   }
 }
 
-export default { APIError }
+class AppError extends Error {
+  constructor(message, error) {
+    super(message)
+    this.error = error
+    Error.captureStackTrace(this, this.constructor)
+  }
+}
+
+export default { APIError, AppError }

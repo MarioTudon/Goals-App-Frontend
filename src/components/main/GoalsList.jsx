@@ -1,12 +1,26 @@
 import GoalCard from '../goals-list/GoalCard'
 import UpdateGoal from '../goals-list/UpdateGoal'
 import { Route, Routes, useNavigate } from 'react-router'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { GoalsContext } from '../../context/GoalsContext'
+import { requestGoals } from '../../services/requests'
 
 function GoalsList() {
     const navigate = useNavigate();
-    const { state } = useContext(GoalsContext)
+    const { state, dispatch } = useContext(GoalsContext)
+
+    useEffect(() => {
+        async function fetchGoals() {
+            try {
+                const res = await requestGoals()
+                dispatch({ type: "read", payload: res })
+            }
+            catch (error) {
+                console.error(error)
+            }
+        }
+        fetchGoals()
+    }, [])
 
     return (
         <>

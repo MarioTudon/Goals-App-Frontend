@@ -5,26 +5,26 @@ import { refreshToken } from '../services/requests.jsx';
 export const AuthContext = createContext(null)
 
 const AuthContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(authReducer, { authenticated: false })
+    const [state, dispatch] = useReducer(authReducer, { authenticated: false})
 
     useEffect(() => {
         async function login() {
             try {
                 await refreshToken()
-                dispatch({ type: "login", payload: { authenticated: true } })
+                dispatch({ type: 'login' })
             }
             catch (error) {
                 console.error(error)
             }
         }
-        login();
-    }, []);
+        login()
+    }, [])
 
     return (
         <AuthContext.Provider value={{ state, dispatch }} >
             {children}
         </AuthContext.Provider >
-    );
-};
+    )
+}
 
 export default AuthContextProvider

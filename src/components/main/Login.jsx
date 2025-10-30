@@ -10,19 +10,22 @@ function Login() {
         password: ''
     })
     const navigate = useNavigate()
+    const [error, setError] = useState('')
     const { dispatch } = useContext(AuthContext)
 
     function handleChange(e, prop) {
+        setError('')
         setForm(state => ({ ...state, [prop]: e.target.value }))
     }
 
     async function login() {
         try {
             await loginUser(form)
-            dispatch({ type: 'login', payload: { authenticated: true } })
+            dispatch({ type: 'login' })
             navigate('/Goals-List')
         } catch (err) {
             console.error(err.error, '\n', err)
+            setError(`${err.message}, please try again`)
         }
     }
 
@@ -41,6 +44,7 @@ function Login() {
                         <div className="font-bold my-2">Password</div>
                         <input type="password" name="password" id="password" placeholder="Enter your password" className="w-full py-2 px-3 rounded-full bg-gray-100 shadow-inner shadow-gray-400" onChange={e => handleChange(e, 'password')} />
                     </label>
+                    <div className="text-red-500 px-2 pt-2 font-bold">{error}</div>
                 </form>
                 <div className="bg-gray-400 w-full flex justify-between mx-auto px-4 py-2 rounded-b-xl">
                     <Button
