@@ -9,20 +9,20 @@ import ProtectedRoute from '../main/ProtectedRoute'
 import { AuthContext } from '../../context/AuthContext'
 
 function Main() {
-    const [authState] = useContext(AuthContext)
+    const { state } = useContext(AuthContext)
 
     return (
         <>
             <main className='h-full relative bg-gradient-to-t from-gray-400 to-gray-100 overflow-y-auto lg:flex'>
-                <Aside isAuthenticated={authState.authenticated} />
+                <Aside isAuthenticated={state.authenticated} />
                 <Routes>
                     {/*Rutas publicas*/}
                     <Route path='/Login' element={<Login />} />
                     <Route path='/Signup' element={<Signup />} />
                     {/*Rutas privadas*/}
-                    <Route path='/*' element={<ProtectedRoute element={GoalsList} isAuthenticated={authState.authenticated} />} />
-                    <Route path='/Goals-List/*' element={<ProtectedRoute element={GoalsList} isAuthenticated={authState.authenticated} />} />
-                    <Route path='/New-Goal' element={<ProtectedRoute element={NewGoal} isAuthenticated={authState.authenticated} />} />
+                    <Route path='/*' element={<ProtectedRoute element={GoalsList} isAuthenticated={state.authenticated} />} />
+                    <Route path='/Goals-List/*' element={<ProtectedRoute element={GoalsList} isAuthenticated={state.authenticated} />} />
+                    <Route path='/New-Goal' element={<ProtectedRoute element={NewGoal} isAuthenticated={state.authenticated} />} />
                 </Routes>
             </main>
         </>

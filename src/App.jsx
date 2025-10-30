@@ -5,12 +5,12 @@ import { AuthContext } from './context/AuthContext'
 import { useContext } from 'react'
 
 function App() {
-  const [authState] = useContext(AuthContext);
-  
+  const { state } = useContext(AuthContext);
+
   return (
     <>
       <div className='flex flex-col h-screen overflow-hidden' >
-        <Header isAuthenticated={authState.authenticated} />
+        <Header isAuthenticated={state.authenticated} />
         <Main />
         <Footer />
       </div>

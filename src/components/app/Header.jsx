@@ -4,14 +4,20 @@ import logoutIcon from '../../assets/logout-icon.svg'
 import { Link, useNavigate } from 'react-router'
 import { useContext } from 'react'
 import { AuthContext } from '../../context/AuthContext'
+import { logoutUser } from "../../services/requests"
 
 function Header({ isAuthenticated }) {
     const navigate = useNavigate()
-    const [, authDispatch] = useContext(AuthContext)
+    const { dispatch } = useContext(AuthContext)
 
-    function logout() {
-        authDispatch({ type: 'authorize', user: { token: '', authenticated: false } })
-        navigate('/Login')
+    async function logout() {
+        try {
+            await logoutUser()
+            dispatch({ type: 'logout', payload: { authenticated: false } })
+            navigate('/Login')
+        } catch (err) {
+            console.error(err.error, '\n', err)
+        }
     }
 
     return (
@@ -27,7 +33,7 @@ function Header({ isAuthenticated }) {
                     {
                         isAuthenticated ?
                             (
-                                <img src={logoutIcon} alt='User Icon' className='w-8 h-8 p-1 rounded-full hover:scale-125 transition duration-medium' onClick={logout}/>
+                                <img src={logoutIcon} alt='User Icon' className='w-8 h-8 p-1 rounded-full hover:scale-125 transition duration-medium' onClick={logout} />
                             )
                             :
                             (

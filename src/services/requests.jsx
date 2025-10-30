@@ -1,5 +1,8 @@
+import { use } from "react"
+import customErrors from '../../errors/customErrors.js'
+
 export async function requestGoals() {
-  const response = await fetch('https://goals-app-backend-production-e4c3.up.railway.app/goals')
+  const response = await fetch('http://localhost:3000/goals')
   if (!response.ok) {
     throw new Error()
   }
@@ -8,7 +11,7 @@ export async function requestGoals() {
 }
 
 export async function createGoal(goal) {
-  const response = await fetch('https://goals-app-backend-production-e4c3.up.railway.app/goals', {
+  const response = await fetch('http://localhost:3000/goals', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(goal)
@@ -22,7 +25,7 @@ export async function createGoal(goal) {
 }
 
 export async function updateGoal(goal) {
-  const response = await fetch(`https://goals-app-backend-production-e4c3.up.railway.app/goals/${goal.id}`, {
+  const response = await fetch(`http://localhost:3000/goals/${goal.id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(goal)
@@ -32,9 +35,72 @@ export async function updateGoal(goal) {
 }
 
 export async function removeGoal(id) {
-  const response = await fetch(`https://goals-app-backend-production-e4c3.up.railway.app/goals/${id}`, {
+  const response = await fetch(`http://localhost:3000/goals/${id}`, {
     method: 'DELETE'
   })
   const idToRemove = await response.json()
   return idToRemove.body
+}
+
+export async function registerUser(user) {
+  const response = await fetch(`http://localhost:3000/auth/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user)
+  })
+  if (!response.ok) {
+    const error = await response.json()
+    if (!response.ok) {
+      throw new customErrors.APIError(error.details, error.error)
+    }
+
+  }
+  const newUser = await response.json()
+  return newUser
+}
+
+
+export async function loginUser(user) {
+  const response = await fetch(`http://localhost:3000/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(user)
+  })
+  if (!response.ok) {
+    const error = await response.json()
+    if (!response.ok) {
+      throw new customErrors.APIError(error.details, error.error)
+    }
+
+  }
+  const result = await response.json()
+  return result
+}
+
+
+export async function logoutUser() {
+  const response = await fetch(`http://localhost:3000/auth/logout`, {
+    credentials: 'include',
+  })
+
+  if (!response.ok) {
+    const error = await response.json()
+    if (!response.ok) {
+      throw new customErrors.APIError(error.details, error.error)
+    }
+  }
+}
+
+export async function refreshToken() {
+  const response = await fetch(`http://localhost:3000/auth/refresh`, {
+    credentials: 'include',
+  })
+
+  if (!response.ok) {
+    const error = await response.json()
+    if (!response.ok) {
+      throw new customErrors.APIError(error.details, error.error)
+    }
+  }
 }

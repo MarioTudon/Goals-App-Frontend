@@ -2,6 +2,7 @@ import { useContext, useState } from "react"
 import Button from "../shared/Button"
 import { useNavigate } from "react-router"
 import { AuthContext } from "../../context/AuthContext"
+import { loginUser } from "../../services/requests"
 
 function Login() {
     const [form, setForm] = useState({
@@ -9,15 +10,20 @@ function Login() {
         password: ''
     })
     const navigate = useNavigate()
-    const [, authDispatch] = useContext(AuthContext)
+    const { dispatch } = useContext(AuthContext)
 
     function handleChange(e, prop) {
         setForm(state => ({ ...state, [prop]: e.target.value }))
     }
 
-    function login() {
-        authDispatch({ type: 'authorize', user: { token: '12345', authenticated: true } })
-        navigate('/Goals-List')
+    async function login() {
+        try {
+            await loginUser(form)
+            dispatch({ type: 'login', payload: { authenticated: true } })
+            navigate('/Goals-List')
+        } catch (err) {
+            console.error(err.error, '\n', err)
+        }
     }
 
     return (
@@ -28,8 +34,8 @@ function Login() {
                 </div>
                 <form action="" className="w-full flex flex-col bg-gray-200 mx-auto px-4 pb-4 pt-2 shadow-md shadow-gray-400">
                     <label className="flex flex-col">
-                        <div className="font-bold my-2">Email</div>
-                        <input type="email" name="email" id="email" placeholder="Enter your email" className="w-full py-2 px-3 rounded-full bg-gray-100 shadow-inner shadow-gray-400" onChange={e => handleChange(e, 'email')} />
+                        <div className="font-bold my-2">Username</div>
+                        <input type="text" name="username" id="username" placeholder="Enter your username" className="w-full py-2 px-3 rounded-full bg-gray-100 shadow-inner shadow-gray-400" onChange={e => handleChange(e, 'username')} />
                     </label>
                     <label className="flex flex-col">
                         <div className="font-bold my-2">Password</div>

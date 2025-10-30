@@ -1,10 +1,11 @@
 import { useState } from "react"
 import Button from "../shared/Button"
 import { useNavigate } from "react-router"
+import { loginUser, registerUser } from "../../services/requests"
 
 function Signup() {
     const [form, setForm] = useState({
-        emai: '',
+        username: '',
         password: ''
     })
     const navigate = useNavigate();
@@ -13,8 +14,13 @@ function Signup() {
         setForm(state => ({ ...state, [prop]: e.target.value }))
     }
 
-    function signup() {
-        console.log(form)
+    async function signup() {
+        try {
+            await registerUser(form)
+            await loginUser(form)
+        } catch (err) {
+            console.error(err.error,'\n',err)
+        }
     }
 
     return (
@@ -25,17 +31,17 @@ function Signup() {
                 </div>
                 <form action="" className="w-full flex flex-col bg-gray-200 mx-auto px-4 pb-4 pt-2 shadow-md shadow-gray-400">
                     <label className="flex flex-col">
-                        <div className="font-bold my-2">Email</div>
-                        <input type="email" name="email" id="email" placeholder="Enter your email" className="w-full py-2 px-3 rounded-full bg-gray-100 shadow-inner shadow-gray-400" onChange={e => handleChange(e, 'email')} />
+                        <div className="font-bold my-2">Username</div>
+                        <input type="text" name="username" id="username" placeholder="Enter your username" className="w-full py-2 px-3 rounded-full bg-gray-100 shadow-inner shadow-gray-400" onChange={e => handleChange(e, 'username')} />
                     </label>
                     <label className="flex flex-col">
                         <div className="font-bold my-2">Password</div>
                         <input type="password" name="password" id="password" placeholder="Enter your password" className="w-full py-2 px-3 rounded-full bg-gray-100 shadow-inner shadow-gray-400" onChange={e => handleChange(e, 'password')} />
                     </label>
-                    <label className="flex flex-col">
+                    {/*<label className="flex flex-col">
                         <div className="font-bold my-2">Confirm your password</div>
                         <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Enter your password again" className="w-full py-2 px-3 rounded-full bg-gray-100 shadow-inner shadow-gray-400" onChange={e => handleChange(e, 'password')} />
-                    </label>
+                    </label>*/}
                 </form>
                 <div className="bg-gray-400 w-full flex justify-between mx-auto px-4 py-2 rounded-b-xl">
                     <Button
