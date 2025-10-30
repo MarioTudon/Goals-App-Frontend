@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import Button from "../shared/Button"
 import { useNavigate } from "react-router"
 import { GoalsContext } from "../../context/GoalsContext"
-import { createGoal } from "../../services/requests"
+import { createGoal, updateGoal } from "../../services/requests"
 
 const icons = [
     // 1. Salud y bienestar:
@@ -64,46 +64,27 @@ function NewGoal() {
         frequency: 0,
         frequencyUnit: "Day",
         target: 0,
-        icon: "🏃‍♂️",
-        id: 0
+        icon: "🏃‍♂️"
     })
     const navigate = useNavigate();
     const { dispatch } = useContext(GoalsContext)
+    const [error, setError] = useState('')
 
 
     function handleChange(e, prop) {
-        const value = e.target.value
-        setNewGoal(state => ({
-            ...state,
-            [prop]: value
-        }))
-    }
-
-
-    function verifyAndFormatForm() {
-        if (newGoal.goal === "") { alert("Enter your goal description"); return false; }
-        if (newGoal.frequency === "") { alert("Enter the frequency of goal"); return false; }
-        if (newGoal.frequency < 1 || newGoal.frequency > 99) { alert("Frequency must be between 1 and 99"); return false; }
-        if (newGoal.target === "") { alert("Enter your target"); return false; }
-        if (newGoal.target < 1 || newGoal.target > 99) { alert("Target must be between 1 and 99"); return false; }
-        newGoal.frequency = removeLeadingZerosRegex(newGoal.frequency);
-        newGoal.target = removeLeadingZerosRegex(newGoal.target);
-        return true;
-    }
-
-    function removeLeadingZerosRegex(str) {
-        return parseInt(str.toString().replace(/^0+(?=\d)/, ''))
+        setError('')
+        setNewGoal(state => ({ ...state, [prop]: e.target.value }))
     }
 
     async function create() {
-        if (!verifyAndFormatForm()) return
         try {
             const response = await createGoal(newGoal)
             dispatch({ type: 'create', payload: response })
             navigate("/Goals-List")
         }
-        catch (error) {
-            console.error(error)
+        catch (err) {
+            console.error(err.error, '\n', err)
+            setError(err.message)
         }
     }
 
@@ -114,6 +95,7 @@ function NewGoal() {
                     Create your goal
                 </div>
                 <form action="" className="w-full flex flex-col bg-gray-200 mx-auto px-4 pb-4 pt-2 shadow-md shadow-gray-400">
+                    <div className="text-red-500 px-2 pt-2 font-bold">{error}</div>
                     <label className="flex flex-col">
                         <div className="font-bold my-2">Describe your goal</div>
                         <input type="text" name="goal-description" id="goal-description" placeholder="E.g. Running 30 minutes" maxLength={30} className="w-full py-2 px-3 rounded-full bg-gray-100 shadow-inner shadow-gray-400" onChange={e => handleChange(e, 'goal')} />

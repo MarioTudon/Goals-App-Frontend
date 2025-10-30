@@ -32,16 +32,26 @@ export async function updateGoal(goal) {
   const response = await fetch(`http://localhost:3000/goals/${goal.id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
     body: JSON.stringify(goal)
   })
+  if (!response.ok) {
+    const error = await response.json()
+    throw new customErrors.APIError(error.details, error.error)
+  }
   const newGoal = await response.json()
   return newGoal.body
 }
 
 export async function removeGoal(id) {
   const response = await fetch(`http://localhost:3000/goals/${id}`, {
-    method: 'DELETE'
+    method: 'DELETE',
+    credentials: 'include',
   })
+  if (!response.ok) {
+    const error = await response.json()
+    throw new customErrors.APIError(error.details, error.error)
+  }
   const idToRemove = await response.json()
   return idToRemove.body
 }

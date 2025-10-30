@@ -1,6 +1,5 @@
 import { createContext, useReducer, useEffect } from "react"
 import goalsReducer from '../reducers/goalsReducer'
-import { requestGoals } from '../services/requests'
 
 export const GoalsContext = createContext();
 

@@ -70,44 +70,43 @@ function EditGoal() {
     const navigate = useNavigate()
     const { state, dispatch } = useContext(GoalsContext)
     const { id } = useParams()
+    const [error, setError] = useState('')
 
     useEffect(() => {
         setUpdatedGoal(state.objects[id])
     }, [id]);
 
     function handleChange(e, prop) {
+        setError('')
         setUpdatedGoal(state => ({ ...state, [prop]: e.target.value }))
-    }
-    function verifyAndFormatForm() {
-        if (updatedGoal.frequency !== "" && (updatedGoal.frequency < 1 || updatedGoal.frequency > 99)) { alert("Frequency must be between 1 and 99"); return false; }
-        if (updatedGoal.target !== "" && (updatedGoal.target < 1 || updatedGoal.target > 99)) { alert("Target must be between 1 and 99"); return false; }
-        if (updatedGoal.target <= state.objects[id].count && updatedGoal.target !== "") { alert("Target should be greater than count"); return false; }
-        updatedGoal.frequency = removeLeadingZerosRegex(updatedGoal.frequency);
-        updatedGoal.target = removeLeadingZerosRegex(updatedGoal.target);
-        return true;
-    }
-
-    function removeLeadingZerosRegex(str) {
-        return parseInt(str.toString().replace(/^0+(?=\d)/, ''),10)
     }
 
     async function resetCount() {
-        const response = await updateGoal({id: id, count: 0})
+        const response = await updateGoal({ id: id, count: 0 })
         dispatch({ type: "update", payload: response })
         navigate("/Goals-List")
     }
 
     async function update() {
-        if (!verifyAndFormatForm()) return
-        const response = await updateGoal(updatedGoal)
-        dispatch({ type: "update", payload: response })
-        navigate("/Goals-List")
+        try {
+            const response = await updateGoal(updatedGoal)
+            dispatch({ type: "update", payload: response })
+            navigate("/Goals-List")
+        } catch (err) {
+            console.error(err.error, '\n', err)
+            setError(err.message)
+        }
     }
 
-    async function remove() { 
-        const response = await removeGoal(id)
-        dispatch({ type: "delete", payload: response })
-        navigate("/Goals-List")
+    async function remove() {
+        try {
+            const response = await removeGoal(id)
+            dispatch({ type: "delete", payload: response })
+            navigate("/Goals-List")
+        } catch (err) {
+            console.error(err.error, '\n', err)
+            setError(err.message)
+        }
     }
 
     return state.order.includes(id) && (
@@ -118,6 +117,7 @@ function EditGoal() {
                         Edit your goal
                     </div>
                     <form action="" className="w-full flex flex-col bg-gray-200 mx-auto px-4 pt-2 shadow-md shadow-gray-400">
+                        <div className="text-red-500 px-2 pt-2 font-bold">{error}</div>
                         <label className="flex flex-col">
                             <div className="font-bold mb-2">Describe your goal</div>
                             <input type="text" name="goal-description" id="goal-description" placeholder="E.g. Running 30 minutes" maxLength={30} className="w-full py-2 px-3 rounded-full bg-gray-100 shadow-inner shadow-gray-400" onChange={e => handleChange(e, 'goal')} defaultValue={state.objects[id].goal} />
@@ -161,7 +161,7 @@ function EditGoal() {
                         <Button
                             label={"Cancel"}
                             styles={"bg-gray-200"}
-                            onClick={() => navigate('/Goals-App/Goals-List')}
+                            onClick={() => navigate('/Goals-List')}
                         />
                         <Button
                             label={"Delete"}
