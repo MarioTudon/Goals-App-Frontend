@@ -1,13 +1,16 @@
 export const initialState = {
-    authenticated: false
+    authenticated: false,
+    username: ''
 }
 
 function authReducer(state, action) {
     switch (action.type) {
         case 'login': {
+            const { username } = action.payload
             const newState = {
                 ...state,
-                authenticated: true
+                authenticated: true,
+                username
             }
             return newState
         }
