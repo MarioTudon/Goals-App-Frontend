@@ -23,6 +23,7 @@ function Signup() {
         try {
             await registerUser(form)
             const res = await loginUser(form)
+            console.log(res)
             dispatch({ type: 'login', payload: res })
             navigate('/Goals-List')
         } catch (err) {
