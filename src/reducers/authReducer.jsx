@@ -12,13 +12,13 @@ function authReducer(state, action) {
                 authenticated: true,
                 username
             }
-            console.log(newState)
             return newState
         }
         case 'logout': {
             const newState = {
                 ...state,
-                authenticated: false
+                authenticated: false,
+                username: ''
             }
             return newState
         }
