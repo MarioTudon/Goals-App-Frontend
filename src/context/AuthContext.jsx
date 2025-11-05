@@ -16,8 +16,8 @@ const AuthContextProvider = ({ children }) => {
                 dispatch({ type: 'login' })
                 navigate('/Goals-List')
             }
-            catch (err) {
-                console.error(err.error, '\n', err)
+            catch (error) {
+                console.error(error)
             }
         }
         login()
