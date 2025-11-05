@@ -8,12 +8,12 @@ import { logoutUser } from "../../services/requests"
 
 function Header({ isAuthenticated }) {
     const navigate = useNavigate()
-    const { dispatch } = useContext(AuthContext)
+    const { state, dispatch } = useContext(AuthContext)
 
     async function logout() {
         try {
             await logoutUser()
-            dispatch({ type: 'logout', payload: { authenticated: false } })
+            dispatch({ type: 'logout' })
             navigate('/Login')
         } catch (err) {
             console.error(err.error, '\n', err)
@@ -33,6 +33,7 @@ function Header({ isAuthenticated }) {
                     {
                         isAuthenticated ?
                             (
+                                <div className="font-bold my-2">{state.username}</div>
                                 <img src={logoutIcon} alt='User Icon' className='w-8 h-8 p-1 rounded-full hover:scale-125 transition duration-medium' onClick={logout} />
                             )
                             :
