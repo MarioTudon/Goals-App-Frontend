@@ -12,6 +12,7 @@ function authReducer(state, action) {
                 authenticated: true,
                 username
             }
+            console.log(newState)
             return newState
         }
         case 'logout': {
