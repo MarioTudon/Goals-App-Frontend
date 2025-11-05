@@ -85,9 +85,9 @@ export async function loginUser(user) {
     }
 
   }
-  const result = await response.json()
-  console.log(result)
-  return result
+  const {username} = await response.json()
+  console.log(username)
+  return username
 }
 
 
