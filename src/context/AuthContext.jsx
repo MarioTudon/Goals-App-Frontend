@@ -12,8 +12,8 @@ const AuthContextProvider = ({ children }) => {
     useEffect(() => {
         async function login() {
             try {
-                await refreshToken()
-                dispatch({ type: 'login' })
+                const res = await refreshToken()
+                dispatch({ type: 'login', payload: res })
                 navigate('/Goals-List')
             }
             catch (error) {
