@@ -22,8 +22,8 @@ function Signup() {
     async function signup() {
         try {
             await registerUser(form)
-            await loginUser(form)
-            dispatch({ type: 'login' })
+            const res = await loginUser(form)
+            dispatch({ type: 'login', payload: res })
             navigate('/Goals-List')
         } catch (err) {
             console.error(err.error, '\n', err)
