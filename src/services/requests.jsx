@@ -78,6 +78,7 @@ export async function loginUser(user) {
     credentials: 'include',
     body: JSON.stringify(user)
   })
+  
   if (!response.ok) {
     const error = await response.json()
     if (!response.ok) {
@@ -85,8 +86,8 @@ export async function loginUser(user) {
     }
 
   }
+  
   const {username} = await response.json()
-  console.log(username)
   return username
 }
 
@@ -111,4 +112,8 @@ export async function refreshToken() {
     const error = await response.json()
     throw new customErrors.APIError(error.details, error.error)
   }
+  
+  const {username} = await response.json()
+  console.log(username)
+  return username
 }
