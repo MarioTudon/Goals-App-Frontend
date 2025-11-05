@@ -87,8 +87,8 @@ export async function loginUser(user) {
 
   }
   
-  const {username} = await response.json()
-  return username
+  const result = await response.json()
+  return result
 }
 
 
@@ -113,7 +113,6 @@ export async function refreshToken() {
     throw new customErrors.APIError(error.details, error.error)
   }
   
-  const {username} = await response.json()
-  console.log(username)
-  return username
+  const result = await response.json()
+  return result
 }
