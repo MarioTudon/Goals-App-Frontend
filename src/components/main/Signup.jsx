@@ -26,7 +26,7 @@ function Signup() {
             dispatch({ type: 'login', payload: res })
             navigate('/Goals-List')
         } catch (err) {
-            console.error(err.error, '\n', err)
+            console.error(err)
             setError(err.message)
         }
     }

@@ -23,8 +23,9 @@ function Login() {
             const res = await loginUser(form)
             dispatch({ type: 'login', payload: res })
             navigate('/Goals-List')
-        } catch (error) {
-            console.error(error)
+        } catch (err) {
+            console.error(err)
+            setError(err.message)
         }
     }
 

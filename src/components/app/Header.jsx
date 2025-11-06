@@ -33,7 +33,7 @@ function Header({ isAuthenticated }) {
                     {
                         isAuthenticated ?
                             <>
-                                <div className="font-bold my-2 mr-6">{state.username}</div>
+                                <div className="font-bold my-2">{state.username}</div>
                                 <img src={logoutIcon} alt='User Icon' className='w-8 h-8 p-1 rounded-full hover:scale-125 transition duration-medium' onClick={logout} />
                             </>
                             :
