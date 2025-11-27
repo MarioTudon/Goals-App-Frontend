@@ -2,7 +2,7 @@ import { use } from "react"
 import customErrors from '../../errors/customErrors.js'
 
 export async function requestGoals() {
-  const response = await fetch('https://goals-app-backend-production-e4c3.up.railway.app/goals', {
+  const response = await fetch('https://goals-app-backend-4oz2.onrender.com/goals', {
     credentials: 'include',
   })
   if (!response.ok) {
@@ -14,7 +14,7 @@ export async function requestGoals() {
 }
 
 export async function createGoal(goal) {
-  const response = await fetch('https://goals-app-backend-production-e4c3.up.railway.app/goals', {
+  const response = await fetch('https://goals-app-backend-4oz2.onrender.com/goals', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
@@ -29,7 +29,7 @@ export async function createGoal(goal) {
 }
 
 export async function updateGoal(goal) {
-  const response = await fetch(`https://goals-app-backend-production-e4c3.up.railway.app/goals/${goal.id}`, {
+  const response = await fetch(`https://goals-app-backend-4oz2.onrender.com/goals/${goal.id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
@@ -44,7 +44,7 @@ export async function updateGoal(goal) {
 }
 
 export async function removeGoal(id) {
-  const response = await fetch(`https://goals-app-backend-production-e4c3.up.railway.app/goals/${id}`, {
+  const response = await fetch(`https://goals-app-backend-4oz2.onrender.com/goals/${id}`, {
     method: 'DELETE',
     credentials: 'include',
   })
@@ -57,7 +57,7 @@ export async function removeGoal(id) {
 }
 
 export async function registerUser(user) {
-  const response = await fetch(`https://goals-app-backend-production-e4c3.up.railway.app/auth/register`, {
+  const response = await fetch(`https://goals-app-backend-4oz2.onrender.com/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user)
@@ -72,7 +72,7 @@ export async function registerUser(user) {
 
 
 export async function loginUser(user) {
-  const response = await fetch(`https://goals-app-backend-production-e4c3.up.railway.app/auth/login`, {
+  const response = await fetch(`https://goals-app-backend-4oz2.onrender.com/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
@@ -93,7 +93,7 @@ export async function loginUser(user) {
 
 
 export async function logoutUser() {
-  const response = await fetch(`https://goals-app-backend-production-e4c3.up.railway.app/auth/logout`, {
+  const response = await fetch(`https://goals-app-backend-4oz2.onrender.com/auth/logout`, {
     credentials: 'include',
   })
 
@@ -104,7 +104,7 @@ export async function logoutUser() {
 }
 
 export async function refreshToken() {
-  const response = await fetch(`https://goals-app-backend-production-e4c3.up.railway.app/auth/refresh`, {
+  const response = await fetch(`https://goals-app-backend-4oz2.onrender.com/auth/refresh`, {
     credentials: 'include',
   })
 
