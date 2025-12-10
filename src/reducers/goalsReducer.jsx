@@ -35,7 +35,7 @@ function goalsReducer(state, action) {
             return newState;
         }
         case 'delete': {
-            const id = action.payload.id
+            const {id} = action.payload
             const newState = {
                 ...state,
                 order: state.order.filter(item => item !== id),
