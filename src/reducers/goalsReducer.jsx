@@ -3,29 +3,25 @@ import { act } from "react"
 function goalsReducer(state, action) {
     switch (action.type) {
         case 'create': {
-            const id = action.payload.id
-
+            const {id} = action.payload
+            const newGoal = action.payload
             const newState = {
-                order: Array.isArray(state.order) ? [...state.order, id] : [id],
+                order: [...state.order, id],
                 objects: {
                     ...state.objects,
-                    [id]: { ...action.payload, id: id }
+                    [id]: { ...newGoal }
                 }
             }
             return newState
         }
         case 'read': {
             const goals = action.payload
-
-            const order = goals.map(goal => goal.id)
-            const objects = goals.reduce((acc, goal) => {
-                acc[goal.id] = goal
-                return acc
-            }, {})
-            return {
-                order,
-                objects
+            const newState = {
+                ...state,
+                order: goals.map(goal => goal.id),
+                objects: Object.fromEntries(goals.map(goal => [goal.id, goal]))
             }
+            return newState
         };
         case 'update': {
             const goal = action.payload
