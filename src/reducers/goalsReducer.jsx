@@ -3,13 +3,12 @@ import { act } from "react"
 function goalsReducer(state, action) {
     switch (action.type) {
         case 'create': {
-            const {id} = action.payload
             const newGoal = action.payload
             const newState = {
                 order: [...state.order, id],
                 objects: {
                     ...state.objects,
-                    [id]: { ...newGoal }
+                    [newGoal.id]: { ...newGoal }
                 }
             }
             return newState
