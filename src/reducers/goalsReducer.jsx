@@ -5,7 +5,7 @@ function goalsReducer(state, action) {
         case 'create': {
             const newGoal = action.payload
             const newState = {
-                order: [...state.order, id],
+                order: [...state.order, newGoal.id],
                 objects: {
                     ...state.objects,
                     [newGoal.id]: { ...newGoal }
