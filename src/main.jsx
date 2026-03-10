@@ -5,7 +5,6 @@ import App from './App.jsx'
 import './output.css'
 import GoalsContextProvider from './context/GoalsContext.jsx'
 import AuthContextProvider from './context/AuthContext.jsx'
-import NotFound from './components/app/NotFound'
 
 createRoot(document.getElementById('root')).render(
   < StrictMode >
@@ -14,7 +13,6 @@ createRoot(document.getElementById('root')).render(
         <GoalsContextProvider>
           <Routes>
             <Route path="/*" element={<App />} />
-            <Route path='*' element={<NotFound />} />
           </Routes>
         </GoalsContextProvider>
       </AuthContextProvider>
