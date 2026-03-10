@@ -1,15 +1,16 @@
-
-import { Navigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router'
+import { useEffect } from 'react'
 
 const ProtectedRoute = ({ element: Element, isAuthenticated }) => {
-  const location = useLocation();
+  const navigate = useNavigate()
 
-  if (isAuthenticated) {
-    return <Element />;
-  }
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/Login')
+    }
+  }, [isAuthenticated, navigate])
 
-  // Preserva la ruta original en state.from
-  return <Navigate to="/Login" replace state={{ from: location }} />;
-};
+  return isAuthenticated ? <Element /> : null
+}
 
-export default ProtectedRoute;
+export default ProtectedRoute
