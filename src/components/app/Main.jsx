@@ -7,6 +7,7 @@ import Login from '../main/Login'
 import Signup from '../main/Signup'
 import ProtectedRoute from '../main/ProtectedRoute'
 import { AuthContext } from '../../context/AuthContext'
+import NotFound from './components/app/NotFound'
 
 function Main() {
     const { state } = useContext(AuthContext)
@@ -19,9 +20,10 @@ function Main() {
                     {!state.authenticated && <Route path='/Login' element={<Login />} />}
                     {!state.authenticated && <Route path='/Signup' element={<Signup />} />}
                     {/*Rutas privadas*/}
-                    <Route path='/*' element={<ProtectedRoute element={GoalsList} isAuthenticated={state.authenticated} />} />
                     <Route path='/Goals-List/*' element={<ProtectedRoute element={GoalsList} isAuthenticated={state.authenticated} />} />
                     <Route path='/New-Goal' element={<ProtectedRoute element={NewGoal} isAuthenticated={state.authenticated} />} />
+                    {/*No encontrado*/}
+                    <Route path='*' element={<NotFound />} />
                 </Routes>
             </main>
         </>
