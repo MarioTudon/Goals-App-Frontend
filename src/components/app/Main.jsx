@@ -7,7 +7,7 @@ import Login from '../main/Login'
 import Signup from '../main/Signup'
 import ProtectedRoute from '../main/ProtectedRoute'
 import { AuthContext } from '../../context/AuthContext'
-import NotFound from './components/app/NotFound'
+import NotFound from '../app/NotFound'
 
 function Main() {
     const { state } = useContext(AuthContext)
